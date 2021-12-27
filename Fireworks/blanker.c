@@ -2,10 +2,10 @@
 ->======================================================<-
 ->= fxBlankers - Fireworks - © Copyright 2021 OnyxSoft =<-
 ->======================================================<-
-->= Version  : 1.0                                     =<-
+->= Version  : 1.1                                     =<-
 ->= File     : blanker.c                               =<-
 ->= Author   : Stefan Blixth                           =<-
-->= Compiled : 2021-09-07                              =<-
+->= Compiled : 2021-12-27                              =<-
 ->======================================================<-
 
 Based on AROS demo source : https://github.com/ezrec/AROS-mirror/tree/ABI_V1/contrib/Demo/Firework
@@ -14,7 +14,7 @@ and the "Simple blanker example" by Guido Mersmann and Michal Wozniak in the Mor
 */
 
 #define  VERSION  1
-#define  REVISION 0
+#define  REVISION 1
 
 #define BLANKERLIBNAME  "fireworks.btd"
 #define BLANKERNAME     "Fireworks"
@@ -53,19 +53,30 @@ and the "Simple blanker example" by Guido Mersmann and Michal Wozniak in the Mor
 char *DEF_CYFIREDELAY[]    = {"20", "30", "40", "50", "60", "70", "80", "90", "100", NULL};
 #define FIREWORK_PARTICLES 4096 //1024 //
 
+#define DEF_FIRETHEME   0x00 // Fire
+char *DEF_CYFIRETHEME[] = {"Fire", "Purple", "Green", "Blue", NULL};
+
+#define THEME_FIRE      0x01
+#define THEME_PURPLE    0x02
+#define THEME_GREEN     0x03
+#define THEME_BLUE      0x04
+
 // blanker settings window definition
 #define nTAG(o)            (BTD_Client + (o))
 #define MYTAG_FIREDELAY    nTAG(0)
+#define MYTAG_FIRETHEME    nTAG(1)
 
 #define DATA_WIDTH   320
 #define DATA_HEIGHT  200
 #define DATA_SIZE    DATA_WIDTH * DATA_HEIGHT
 
-static struct BTDCycle OBJ_FireDelay = {{MYTAG_FIREDELAY, "Flame delay (ms)", BTDPT_CYCLE}, DEF_FIREDELAY, DEF_CYFIREDELAY};
+static struct BTDCycle OBJ_FireDelay = {{MYTAG_FIREDELAY, "Delay (ms) :", BTDPT_CYCLE}, DEF_FIREDELAY, DEF_CYFIREDELAY};
+static struct BTDCycle OBJ_FireTheme = {{MYTAG_FIRETHEME, "Theme :", BTDPT_CYCLE}, DEF_FIRETHEME, DEF_CYFIRETHEME};
 
 struct BTDNode *BlankerGUI[] =
 {
    (APTR) &OBJ_FireDelay,
+   (APTR) &OBJ_FireTheme,
    NULL,
 };
 
@@ -131,6 +142,7 @@ struct BlankerData
 
    // Settings
    IPTR                 bd_Settings_FireDelay;
+   IPTR                 bd_Settings_FireTheme;
 
    // Runtime data
    IPTR                 bd_StopRendering;
@@ -323,6 +335,7 @@ struct BlankerData *InitMyBlanker(struct TagItem *TagList)
 
          bd->bd_PreviewMode = GetTagData(BTD_PreviewMode, FALSE, TagList);
          bd->bd_Settings_FireDelay = GetTagData(MYTAG_FIREDELAY, (ULONG) DEF_FIREDELAY, TagList) + 1;
+         bd->bd_Settings_FireTheme = GetTagData(MYTAG_FIRETHEME, (ULONG) DEF_FIRETHEME, TagList) + 1;
 
          bd->Active = FALSE;
          bd->firebuffer = AllocVecTaskPooled(DATA_WIDTH*(DATA_HEIGHT + 2));
@@ -355,7 +368,24 @@ struct BlankerData *InitMyBlanker(struct TagItem *TagList)
                ULONG green = pal[palindex*3+1] * 4;
                ULONG blue  = pal[palindex*3+2] * 4;
 
-               bd->cgfx_coltab[palindex] = (red << 16) + (green << 8) + blue;
+               switch (bd->bd_Settings_FireTheme)
+               {
+                  case THEME_PURPLE:
+                     bd->cgfx_coltab[palindex] = (red << 16) + (green << 8) + red;
+                     break;
+
+                  case THEME_GREEN:
+                     bd->cgfx_coltab[palindex] = (green << 16) + (red << 8) + blue;
+                     break;
+
+                  case THEME_BLUE:
+                     bd->cgfx_coltab[palindex] = (blue << 16) + (green << 8) + red;
+                     break;
+
+                  default : // THEME_FIRE
+                     bd->cgfx_coltab[palindex] = (red << 16) + (green << 8) + blue;
+                     break;
+               }
             }
 
             FillPixelArray(bd->bd_RastPort, bd->bd_Left, bd->bd_Top, bd->bd_Width, bd->bd_Height, 0x00000000);
