@@ -10,7 +10,6 @@
 
 Based on retro-demoeffect dotflag source by Johan Gardhage : https://github.com/johangardhage/retro-demoeffects/blob/master/src/dotflag.cpp
 and the "Simple blanker example" by Guido Mersmann and Michal Wozniak in the MorphOS SDK.
-
 */
 
 #define  VERSION  1
