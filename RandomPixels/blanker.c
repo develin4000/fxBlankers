@@ -2,7 +2,7 @@
 ->=========================================================<-
 ->= fxBlankers - RandomPixels - © Copyright 2023 OnyxSoft =<-
 ->=========================================================<-
-->= Version  : 1.2                                        =<-
+->= Version  : 1.3                                        =<-
 ->= File     : blanker.c                                  =<-
 ->= Author   : Stefan Blixth                              =<-
 ->= Compiled : 2023-07-10                                 =<-
@@ -14,9 +14,9 @@ and the "Simple blanker example" by Guido Mersmann and Michal Wozniak in the Mor
 */
 
 #define  VERSION  1
-#define  REVISION 2
+#define  REVISION 3
 
-#define BLANKERLIBNAME  "RandomPixels.btd"
+#define BLANKERLIBNAME  "randompixels.btd"
 #define BLANKERNAME     "RandomPixels"
 #define AUTHORNAME      "Stefan Blixth, OnyxSoft"
 #define DESCRIPTION     "Random pixel effect"
@@ -535,16 +535,6 @@ struct BlankerData *InitMyBlanker(struct TagItem *TagList)
  *----------------------------------------------------------------------------*/
 void AnimMyBlanker(struct BlankerData *bd)
 {
-   //int x1, x2, y1, y2, xp, yp, xc, yc, x, y;
-   //unsigned long color;
-   int frame;
-   static double frame_counter = 0;
-   float deltatime = 5.0f;
-
-   frame_counter += deltatime * 100;
-   frame = frame_counter;
-
-
    debug_print("%s : %s (%d) - PrevieMode : %d\n", __FILE__ , __func__, __LINE__, bd->bd_PreviewMode);
 
    bd->bd_TimerRequest.tr_time.tv_micro = (bd->bd_Settings_RandDelay*25)*1000;

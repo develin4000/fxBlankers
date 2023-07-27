@@ -2,7 +2,7 @@
 ->====================================================<-
 ->= fxBlankers - DotFlag - © Copyright 2023 OnyxSoft =<-
 ->====================================================<-
-->= Version  : 1.2                                   =<-
+->= Version  : 1.3                                   =<-
 ->= File     : blanker.c                             =<-
 ->= Author   : Stefan Blixth                         =<-
 ->= Compiled : 2023-07-10                            =<-
@@ -13,7 +13,7 @@ and the "Simple blanker example" by Guido Mersmann and Michal Wozniak in the Mor
 */
 
 #define  VERSION  1
-#define  REVISION 2
+#define  REVISION 3
 
 #define BLANKERLIBNAME  "dotflag.btd"
 #define BLANKERNAME     "DotFlag"

@@ -1,4 +1,4 @@
-BLANKERNAME = RandomPixels.btd
+BLANKERNAME = randompixels.btd
 
 CC = ppc-morphos-gcc
 STRIP = ppc-morphos-strip

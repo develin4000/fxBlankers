@@ -2,7 +2,7 @@
 ->===================================================<-
 ->= fxBlankers - Flamme - © Copyright 2021 OnyxSoft =<-
 ->===================================================<-
-->= Version  : 1.1                                  =<-
+->= Version  : 1.3                                  =<-
 ->= File     : blanker.c                            =<-
 ->= Author   : Stefan Blixth                        =<-
 ->= Compiled : 2021-12-27                           =<-
@@ -14,7 +14,7 @@ and the "Simple blanker example" by Guido Mersmann and Michal Wozniak in the Mor
 */
 
 #define  VERSION  1
-#define  REVISION 1
+#define  REVISION 3
 
 #define BLANKERLIBNAME  "flamme.btd"
 #define BLANKERNAME     "Flamme"
