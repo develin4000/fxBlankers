@@ -1,19 +1,19 @@
 /*
-->========================================================<-
-->= fxBlankers - MysticLines - © Copyright 2023 OnyxSoft =<-
-->========================================================<-
-->= Version  : 1.3                                       =<-
-->= File     : blanker.c                                 =<-
-->= Author   : Stefan Blixth                             =<-
-->= Compiled : 2023-07-25                                =<-
-->========================================================<-
+->==========================================================<-
+->= fxBlankers - MysticLines - (c) Copyright 2023 OnyxSoft =<-
+->==========================================================<-
+->= Version  : 1.4                                         =<-
+->= File     : blanker.c                                   =<-
+->= Author   : Stefan Blixth                               =<-
+->= Compiled : 2026-11-26                                  =<-
+->==========================================================<-
 
 Using line-render routine from flightcrank : https://github.com/flightcrank/demo-effects/blob/master/stars/stars_1/renderer.c
 and June Tate-Gans from Nybbles and Bytes Mystify QBasic example from the live stream : https://youtu.be/bl0td3qV7WM?t=480
 */
 
 #define  VERSION  1
-#define  REVISION 3
+#define  REVISION 4
 
 #define BLANKERLIBNAME  "mysticlines.btd"
 #define BLANKERNAME     "MysticLines"
@@ -86,7 +86,7 @@ struct BTDNode *BlankerGUI[] =
 };
 
 // compose strings for multiple usage
-UBYTE BlankerVersionID[]   = "$VER: " BLANKERLIBNAME " " I2S(VERSION) "." I2S(REVISION) " (" __AMIGADATE__ ") © " __COPYRIGHTYEAR__ " " AUTHORNAME;
+UBYTE BlankerVersionID[]   = "$VER: " BLANKERLIBNAME " " I2S(VERSION) "." I2S(REVISION) " (" __AMIGADATE__ ") (c) " __COPYRIGHTYEAR__ " " AUTHORNAME;
 UBYTE BlankerLibName[]     = BLANKERLIBNAME;
 UBYTE BlankerName[]        = BLANKERNAME;
 UBYTE BlankerAuthor[]      = AUTHORNAME;

@@ -1,0 +1,36 @@
+BLANKERNAME = dottunnel.btd
+
+CC = ppc-morphos-gcc-9
+STRIP = ppc-morphos-strip
+
+CFLAGS = -D__AMIGADATE__=\"$(shell date "+%d.%m.%y")\" -D__COPYRIGHTYEAR__=\"$(shell date "+%Y")\" -O2 -Wall -noixemul -mfused-madd -fomit-frame-pointer
+
+OBJS = lib.o libfunctable.o libfunctions.o blanker.o
+
+all: $(BLANKERNAME)
+
+blanker.o: blanker.c debug.h
+libfunctable.o: libfunctable.c
+libfunctions.o: libfunctions.c libdata.h
+lib.o: lib.c libdata.h
+
+$(BLANKERNAME): $(OBJS)
+	$(CC) -nostdlib $(CFLAGS) -o $@.db $(OBJS) -lc -lm -lc -laboxstubs -ldebug -g
+	$(STRIP) --strip-unneeded --remove-section=.comment $@.db -o $@
+
+
+# MUI test lab the effect was first ported in
+renderclass: renderclass-dostunnel.c renderclass.h debug.h
+	$(CC) renderclass-dostunnel.c -o $@ -noixemul -O3 -lm
+
+clean:
+	rm -f *.o *.db *.btd
+
+dump:
+	objdump --section-headers --all-headers --reloc --disassemble-all $(BLANKERNAME).db >$(BLANKERNAME).dump
+
+install: $(BLANKERNAME)
+	cp $(BLANKERNAME) SYS:Classes/Blankers/$(BLANKERNAME)
+	FlushLib $(BLANKERNAME)
+
+.PHONY: all clean dump install

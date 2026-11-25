@@ -1,12 +1,12 @@
 /*
-->======================================================<-
-->= fxBlankers - Fireworks - © Copyright 2021 OnyxSoft =<-
-->======================================================<-
-->= Version  : 1.3                                     =<-
-->= File     : blanker.c                               =<-
-->= Author   : Stefan Blixth                           =<-
-->= Compiled : 2021-12-27                              =<-
-->======================================================<-
+->========================================================<-
+->= fxBlankers - Fireworks - (c) Copyright 2021 OnyxSoft =<-
+->========================================================<-
+->= Version  : 1.4                                       =<-
+->= File     : blanker.c                                 =<-
+->= Author   : Stefan Blixth                             =<-
+->= Compiled : 2026-11-26                                =<-
+->========================================================<-
 
 Based on AROS demo source : https://github.com/ezrec/AROS-mirror/tree/ABI_V1/contrib/Demo/Firework
 and the "Simple blanker example" by Guido Mersmann and Michal Wozniak in the MorphOS SDK.
@@ -14,7 +14,7 @@ and the "Simple blanker example" by Guido Mersmann and Michal Wozniak in the Mor
 */
 
 #define  VERSION  1
-#define  REVISION 3
+#define  REVISION 4
 
 #define BLANKERLIBNAME  "fireworks.btd"
 #define BLANKERNAME     "Fireworks"
@@ -81,7 +81,7 @@ struct BTDNode *BlankerGUI[] =
 };
 
 // compose strings for multiple usage
-UBYTE BlankerVersionID[]   = "$VER: " BLANKERLIBNAME " " I2S(VERSION) "." I2S(REVISION) " (" __AMIGADATE__ ") © " __COPYRIGHTYEAR__ " " AUTHORNAME;
+UBYTE BlankerVersionID[]   = "$VER: " BLANKERLIBNAME " " I2S(VERSION) "." I2S(REVISION) " (" __AMIGADATE__ ") (c) " __COPYRIGHTYEAR__ " " AUTHORNAME;
 UBYTE BlankerLibName[]     = BLANKERLIBNAME;
 UBYTE BlankerName[]        = BLANKERNAME;
 UBYTE BlankerAuthor[]      = AUTHORNAME;

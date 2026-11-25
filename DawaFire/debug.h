@@ -1,5 +1,5 @@
 /*!
-   Copyright © OnyxSoft 2010-2013
+   Copyright (c) OnyxSoft 2010-2013
 
    \file    debug.h
    \brief   Take care and prints out our debug data for us

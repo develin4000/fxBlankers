@@ -1,6 +1,6 @@
 BLANKERNAME = dotflag.btd
 
-CC = ppc-morphos-gcc
+CC = ppc-morphos-gcc-9
 STRIP = ppc-morphos-strip
 
 CFLAGS = -D__AMIGADATE__=\"$(shell date "+%d.%m.%y")\" -D__COPYRIGHTYEAR__=\"$(shell date "+%Y")\" -O2 -Wall -noixemul -mfused-madd -fomit-frame-pointer
@@ -17,7 +17,6 @@ lib.o: lib.c libdata.h
 $(BLANKERNAME): $(OBJS)
 	$(CC) -nostdlib $(CFLAGS) -o $@.db $(OBJS) -lc -lm -lc -laboxstubs -ldebug -g
 	$(STRIP) --strip-unneeded --remove-section=.comment $@.db -o $@
-	chmod u+x $@
 
 clean:
 	rm -f *.o *.db *.btd
